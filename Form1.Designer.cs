@@ -49,6 +49,8 @@
             this.notifyLabel1 = new Guna.UI.WinForms.GunaLabel();
             this.notifyLabel2 = new Guna.UI.WinForms.GunaLabel();
             this.notifyLabel3 = new Guna.UI.WinForms.GunaLabel();
+            this.stopButton = new Guna.UI2.WinForms.Guna2Button();
+            this.ThreadsLabel = new Guna.UI.WinForms.GunaLabel();
             this.TopPanel.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
@@ -291,7 +293,7 @@
             this.runButton.Name = "runButton";
             this.runButton.PressedColor = System.Drawing.Color.DarkRed;
             this.runButton.ShadowDecoration.Parent = this.runButton;
-            this.runButton.Size = new System.Drawing.Size(197, 36);
+            this.runButton.Size = new System.Drawing.Size(91, 36);
             this.runButton.TabIndex = 13;
             this.runButton.Text = "ПОЕХАЛИ!";
             this.runButton.Click += new System.EventHandler(this.runButton_Click);
@@ -331,6 +333,40 @@
             this.notifyLabel3.TabIndex = 16;
             this.notifyLabel3.Text = " - Специальная библиотека";
             // 
+            // stopButton
+            // 
+            this.stopButton.BorderColor = System.Drawing.Color.DarkRed;
+            this.stopButton.CheckedState.Parent = this.stopButton;
+            this.stopButton.CustomBorderColor = System.Drawing.Color.DarkRed;
+            this.stopButton.CustomImages.Parent = this.stopButton;
+            this.stopButton.FillColor = System.Drawing.Color.Red;
+            this.stopButton.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.stopButton.ForeColor = System.Drawing.Color.White;
+            this.stopButton.HoverState.BorderColor = System.Drawing.Color.DarkRed;
+            this.stopButton.HoverState.FillColor = System.Drawing.Color.Brown;
+            this.stopButton.HoverState.Font = new System.Drawing.Font("Segoe UI", 13F);
+            this.stopButton.HoverState.Parent = this.stopButton;
+            this.stopButton.Location = new System.Drawing.Point(213, 186);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.PressedColor = System.Drawing.Color.DarkRed;
+            this.stopButton.ShadowDecoration.Parent = this.stopButton;
+            this.stopButton.Size = new System.Drawing.Size(91, 36);
+            this.stopButton.TabIndex = 17;
+            this.stopButton.Text = "СТОП!";
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // ThreadsLabel
+            // 
+            this.ThreadsLabel.AutoSize = true;
+            this.ThreadsLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ThreadsLabel.Font = new System.Drawing.Font("Segoe UI Light", 15F);
+            this.ThreadsLabel.ForeColor = System.Drawing.Color.White;
+            this.ThreadsLabel.Location = new System.Drawing.Point(63, 225);
+            this.ThreadsLabel.Name = "ThreadsLabel";
+            this.ThreadsLabel.Size = new System.Drawing.Size(89, 28);
+            this.ThreadsLabel.TabIndex = 18;
+            this.ThreadsLabel.Text = "Потоков:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,6 +374,8 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(588, 259);
             this.ControlBox = false;
+            this.Controls.Add(this.ThreadsLabel);
+            this.Controls.Add(this.stopButton);
             this.Controls.Add(this.notifyLabel3);
             this.Controls.Add(this.notifyLabel2);
             this.Controls.Add(this.notifyLabel1);
@@ -386,6 +424,8 @@
         private Guna.UI.WinForms.GunaLabel notifyLabel1;
         private Guna.UI.WinForms.GunaLabel notifyLabel2;
         private Guna.UI.WinForms.GunaLabel notifyLabel3;
+        private Guna.UI2.WinForms.Guna2Button stopButton;
+        private Guna.UI.WinForms.GunaLabel ThreadsLabel;
     }
 }
 

