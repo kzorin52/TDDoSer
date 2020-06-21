@@ -35,17 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bunifu_UI_v1.5.3">
-      <HintPath>D:\Downloads\UIs\Bunifu_UI_v1.5.3.dll</HintPath>
-    </Reference>
     <Reference Include="Guna.UI">
       <HintPath>D:\Downloads\UIs\Guna.UI.dll</HintPath>
     </Reference>
     <Reference Include="Guna.UI2">
       <HintPath>D:\Downloads\UIs\Guna.UI2.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroSet UI">
-      <HintPath>D:\Downloads\UIs\MetroSet UI.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />

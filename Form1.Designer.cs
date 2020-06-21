@@ -13,6 +13,7 @@
         /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
         protected override void Dispose(bool disposing)
         {
+            STOP();
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -37,22 +38,25 @@
             this.FormDrag = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.TargetTextBox = new Guna.UI2.WinForms.Guna2TextBox();
             this.gunaLabel1 = new Guna.UI.WinForms.GunaLabel();
-            this.banditSwitch = new Guna.UI.WinForms.GunaGoogleSwitch();
-            this.pingSwitch = new Guna.UI.WinForms.GunaGoogleSwitch();
+            this.PSPingSwitch = new Guna.UI.WinForms.GunaGoogleSwitch();
+            this.CMDPing = new Guna.UI.WinForms.GunaGoogleSwitch();
             this.banditLabel = new Guna.UI.WinForms.GunaLabel();
             this.pingLabel = new Guna.UI.WinForms.GunaLabel();
-            this.banditThreads = new Guna.UI.WinForms.GunaNumeric();
-            this.pingThreads = new Guna.UI.WinForms.GunaNumeric();
-            this.gunaLabel4 = new Guna.UI.WinForms.GunaLabel();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.PSThreads = new Guna.UI.WinForms.GunaNumeric();
+            this.CMDThreads = new Guna.UI.WinForms.GunaNumeric();
             this.runButton = new Guna.UI2.WinForms.Guna2Button();
             this.notifyLabel1 = new Guna.UI.WinForms.GunaLabel();
             this.notifyLabel2 = new Guna.UI.WinForms.GunaLabel();
-            this.notifyLabel3 = new Guna.UI.WinForms.GunaLabel();
             this.stopButton = new Guna.UI2.WinForms.Guna2Button();
             this.ThreadsLabel = new Guna.UI.WinForms.GunaLabel();
+            this.Packets = new Guna.UI.WinForms.GunaLabel();
+            this.ddTools = new Guna.UI.WinForms.GunaGoogleSwitch();
+            this.gunaLabel2 = new Guna.UI.WinForms.GunaLabel();
+            this.xuiCustomGroupbox1 = new XanderUI.XUICustomGroupbox();
+            this.xuiCustomGroupbox2 = new XanderUI.XUICustomGroupbox();
             this.TopPanel.SuspendLayout();
-            this.guna2Panel1.SuspendLayout();
+            this.xuiCustomGroupbox1.SuspendLayout();
+            this.xuiCustomGroupbox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // TopPanel
@@ -103,6 +107,7 @@
             // 
             this.TextLabel.AutoSize = true;
             this.TextLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TextLabel.ForeColor = System.Drawing.Color.DarkRed;
             this.TextLabel.Location = new System.Drawing.Point(3, 9);
             this.TextLabel.Name = "TextLabel";
             this.TextLabel.Size = new System.Drawing.Size(59, 15);
@@ -147,7 +152,7 @@
             this.TargetTextBox.HideSelection = false;
             this.TargetTextBox.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TargetTextBox.HoverState.Parent = this.TargetTextBox;
-            this.TargetTextBox.Location = new System.Drawing.Point(107, 36);
+            this.TargetTextBox.Location = new System.Drawing.Point(109, 36);
             this.TargetTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TargetTextBox.MaxLength = 300;
             this.TargetTextBox.Name = "TargetTextBox";
@@ -165,116 +170,96 @@
             this.gunaLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gunaLabel1.Font = new System.Drawing.Font("Segoe UI Light", 15F);
             this.gunaLabel1.ForeColor = System.Drawing.Color.White;
-            this.gunaLabel1.Location = new System.Drawing.Point(22, 36);
+            this.gunaLabel1.Location = new System.Drawing.Point(1, 38);
             this.gunaLabel1.Name = "gunaLabel1";
-            this.gunaLabel1.Size = new System.Drawing.Size(59, 28);
+            this.gunaLabel1.Size = new System.Drawing.Size(88, 28);
             this.gunaLabel1.TabIndex = 2;
-            this.gunaLabel1.Text = "Цель:";
+            this.gunaLabel1.Text = "Цель (IP)";
             // 
-            // banditSwitch
+            // PSPingSwitch
             // 
-            this.banditSwitch.BaseColor = System.Drawing.SystemColors.Control;
-            this.banditSwitch.CheckedOffColor = System.Drawing.Color.DarkGray;
-            this.banditSwitch.CheckedOnColor = System.Drawing.Color.Red;
-            this.banditSwitch.FillColor = System.Drawing.Color.White;
-            this.banditSwitch.Location = new System.Drawing.Point(7, 19);
-            this.banditSwitch.Name = "banditSwitch";
-            this.banditSwitch.Size = new System.Drawing.Size(38, 20);
-            this.banditSwitch.TabIndex = 4;
+            this.PSPingSwitch.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.PSPingSwitch.BaseColor = System.Drawing.SystemColors.Control;
+            this.PSPingSwitch.CheckedOffColor = System.Drawing.Color.DarkGray;
+            this.PSPingSwitch.CheckedOnColor = System.Drawing.Color.Red;
+            this.PSPingSwitch.FillColor = System.Drawing.Color.White;
+            this.PSPingSwitch.Location = new System.Drawing.Point(9, 23);
+            this.PSPingSwitch.Name = "PSPingSwitch";
+            this.PSPingSwitch.Size = new System.Drawing.Size(38, 20);
+            this.PSPingSwitch.TabIndex = 4;
             // 
-            // pingSwitch
+            // CMDPing
             // 
-            this.pingSwitch.BaseColor = System.Drawing.SystemColors.Control;
-            this.pingSwitch.CheckedOffColor = System.Drawing.Color.DarkGray;
-            this.pingSwitch.CheckedOnColor = System.Drawing.Color.Red;
-            this.pingSwitch.FillColor = System.Drawing.Color.White;
-            this.pingSwitch.Location = new System.Drawing.Point(7, 59);
-            this.pingSwitch.Name = "pingSwitch";
-            this.pingSwitch.Size = new System.Drawing.Size(38, 20);
-            this.pingSwitch.TabIndex = 5;
+            this.CMDPing.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CMDPing.BaseColor = System.Drawing.SystemColors.Control;
+            this.CMDPing.CheckedOffColor = System.Drawing.Color.DarkGray;
+            this.CMDPing.CheckedOnColor = System.Drawing.Color.Red;
+            this.CMDPing.FillColor = System.Drawing.Color.White;
+            this.CMDPing.Location = new System.Drawing.Point(9, 63);
+            this.CMDPing.Name = "CMDPing";
+            this.CMDPing.Size = new System.Drawing.Size(38, 20);
+            this.CMDPing.TabIndex = 5;
             // 
             // banditLabel
             // 
+            this.banditLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.banditLabel.AutoSize = true;
             this.banditLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.banditLabel.Font = new System.Drawing.Font("Segoe UI Light", 15F);
             this.banditLabel.ForeColor = System.Drawing.Color.White;
-            this.banditLabel.Location = new System.Drawing.Point(51, 11);
+            this.banditLabel.Location = new System.Drawing.Point(53, 15);
             this.banditLabel.Name = "banditLabel";
-            this.banditLabel.Size = new System.Drawing.Size(65, 28);
+            this.banditLabel.Size = new System.Drawing.Size(104, 28);
             this.banditLabel.TabIndex = 6;
-            this.banditLabel.Text = "Bandit";
+            this.banditLabel.Text = "PowerShell";
             // 
             // pingLabel
             // 
+            this.pingLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pingLabel.AutoSize = true;
             this.pingLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pingLabel.Font = new System.Drawing.Font("Segoe UI Light", 15F);
             this.pingLabel.ForeColor = System.Drawing.Color.White;
-            this.pingLabel.Location = new System.Drawing.Point(51, 51);
+            this.pingLabel.Location = new System.Drawing.Point(53, 55);
             this.pingLabel.Name = "pingLabel";
-            this.pingLabel.Size = new System.Drawing.Size(49, 28);
+            this.pingLabel.Size = new System.Drawing.Size(54, 28);
             this.pingLabel.TabIndex = 7;
-            this.pingLabel.Text = "Ping";
+            this.pingLabel.Text = "CMD";
             // 
-            // banditThreads
+            // PSThreads
             // 
-            this.banditThreads.BaseColor = System.Drawing.Color.Black;
-            this.banditThreads.BorderColor = System.Drawing.Color.DarkRed;
-            this.banditThreads.ButtonColor = System.Drawing.Color.Red;
-            this.banditThreads.ButtonForeColor = System.Drawing.Color.White;
-            this.banditThreads.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.banditThreads.ForeColor = System.Drawing.Color.White;
-            this.banditThreads.Location = new System.Drawing.Point(122, 11);
-            this.banditThreads.Maximum = ((long)(5000));
-            this.banditThreads.Minimum = ((long)(0));
-            this.banditThreads.Name = "banditThreads";
-            this.banditThreads.Size = new System.Drawing.Size(75, 30);
-            this.banditThreads.TabIndex = 9;
-            this.banditThreads.Text = "gunaNumeric1";
-            this.banditThreads.Value = ((long)(0));
+            this.PSThreads.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.PSThreads.BaseColor = System.Drawing.Color.Black;
+            this.PSThreads.BorderColor = System.Drawing.Color.DarkRed;
+            this.PSThreads.ButtonColor = System.Drawing.Color.Red;
+            this.PSThreads.ButtonForeColor = System.Drawing.Color.White;
+            this.PSThreads.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.PSThreads.ForeColor = System.Drawing.Color.White;
+            this.PSThreads.Location = new System.Drawing.Point(174, 19);
+            this.PSThreads.Maximum = ((long)(5000));
+            this.PSThreads.Minimum = ((long)(0));
+            this.PSThreads.Name = "PSThreads";
+            this.PSThreads.Size = new System.Drawing.Size(75, 30);
+            this.PSThreads.TabIndex = 9;
+            this.PSThreads.Text = "gunaNumeric1";
+            this.PSThreads.Value = ((long)(0));
             // 
-            // pingThreads
+            // CMDThreads
             // 
-            this.pingThreads.BaseColor = System.Drawing.Color.Black;
-            this.pingThreads.BorderColor = System.Drawing.Color.DarkRed;
-            this.pingThreads.ButtonColor = System.Drawing.Color.Red;
-            this.pingThreads.ButtonForeColor = System.Drawing.Color.White;
-            this.pingThreads.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.pingThreads.ForeColor = System.Drawing.Color.White;
-            this.pingThreads.Location = new System.Drawing.Point(122, 51);
-            this.pingThreads.Maximum = ((long)(5000));
-            this.pingThreads.Minimum = ((long)(0));
-            this.pingThreads.Name = "pingThreads";
-            this.pingThreads.Size = new System.Drawing.Size(75, 30);
-            this.pingThreads.TabIndex = 10;
-            this.pingThreads.Value = ((long)(0));
-            // 
-            // gunaLabel4
-            // 
-            this.gunaLabel4.AutoSize = true;
-            this.gunaLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gunaLabel4.Font = new System.Drawing.Font("Segoe UI Light", 15F);
-            this.gunaLabel4.ForeColor = System.Drawing.Color.White;
-            this.gunaLabel4.Location = new System.Drawing.Point(12, 113);
-            this.gunaLabel4.Name = "gunaLabel4";
-            this.gunaLabel4.Size = new System.Drawing.Size(89, 28);
-            this.gunaLabel4.TabIndex = 11;
-            this.gunaLabel4.Text = "Потоков:";
-            // 
-            // guna2Panel1
-            // 
-            this.guna2Panel1.Controls.Add(this.pingThreads);
-            this.guna2Panel1.Controls.Add(this.banditSwitch);
-            this.guna2Panel1.Controls.Add(this.pingSwitch);
-            this.guna2Panel1.Controls.Add(this.banditThreads);
-            this.guna2Panel1.Controls.Add(this.banditLabel);
-            this.guna2Panel1.Controls.Add(this.pingLabel);
-            this.guna2Panel1.Location = new System.Drawing.Point(107, 77);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
-            this.guna2Panel1.Size = new System.Drawing.Size(200, 95);
-            this.guna2Panel1.TabIndex = 12;
+            this.CMDThreads.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CMDThreads.BaseColor = System.Drawing.Color.Black;
+            this.CMDThreads.BorderColor = System.Drawing.Color.DarkRed;
+            this.CMDThreads.ButtonColor = System.Drawing.Color.Red;
+            this.CMDThreads.ButtonForeColor = System.Drawing.Color.White;
+            this.CMDThreads.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.CMDThreads.ForeColor = System.Drawing.Color.White;
+            this.CMDThreads.Location = new System.Drawing.Point(174, 55);
+            this.CMDThreads.Maximum = ((long)(5000));
+            this.CMDThreads.Minimum = ((long)(0));
+            this.CMDThreads.Name = "CMDThreads";
+            this.CMDThreads.Size = new System.Drawing.Size(75, 30);
+            this.CMDThreads.TabIndex = 10;
+            this.CMDThreads.Value = ((long)(0));
             // 
             // runButton
             // 
@@ -289,7 +274,7 @@
             this.runButton.HoverState.FillColor = System.Drawing.Color.Brown;
             this.runButton.HoverState.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.runButton.HoverState.Parent = this.runButton;
-            this.runButton.Location = new System.Drawing.Point(107, 186);
+            this.runButton.Location = new System.Drawing.Point(81, 249);
             this.runButton.Name = "runButton";
             this.runButton.PressedColor = System.Drawing.Color.DarkRed;
             this.runButton.ShadowDecoration.Parent = this.runButton;
@@ -315,23 +300,11 @@
             this.notifyLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.notifyLabel2.Font = new System.Drawing.Font("Segoe UI Light", 13F);
             this.notifyLabel2.ForeColor = System.Drawing.Color.White;
-            this.notifyLabel2.Location = new System.Drawing.Point(331, 136);
+            this.notifyLabel2.Location = new System.Drawing.Point(352, 86);
             this.notifyLabel2.Name = "notifyLabel2";
-            this.notifyLabel2.Size = new System.Drawing.Size(250, 86);
+            this.notifyLabel2.Size = new System.Drawing.Size(236, 86);
             this.notifyLabel2.TabIndex = 15;
-            this.notifyLabel2.Text = " - ВНИМАНИЕ! \r\nПинг, если больше 100, убьёт ВАШ комп";
-            // 
-            // notifyLabel3
-            // 
-            this.notifyLabel3.AutoSize = true;
-            this.notifyLabel3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.notifyLabel3.Font = new System.Drawing.Font("Segoe UI Light", 13F);
-            this.notifyLabel3.ForeColor = System.Drawing.Color.White;
-            this.notifyLabel3.Location = new System.Drawing.Point(331, 90);
-            this.notifyLabel3.Name = "notifyLabel3";
-            this.notifyLabel3.Size = new System.Drawing.Size(230, 25);
-            this.notifyLabel3.TabIndex = 16;
-            this.notifyLabel3.Text = " - Специальная библиотека";
+            this.notifyLabel2.Text = " - ВНИМАНИЕ! \r\nПинг, если больше 500, убьёт ВАШ комп";
             // 
             // stopButton
             // 
@@ -346,7 +319,7 @@
             this.stopButton.HoverState.FillColor = System.Drawing.Color.Brown;
             this.stopButton.HoverState.Font = new System.Drawing.Font("Segoe UI", 13F);
             this.stopButton.HoverState.Parent = this.stopButton;
-            this.stopButton.Location = new System.Drawing.Point(213, 186);
+            this.stopButton.Location = new System.Drawing.Point(255, 249);
             this.stopButton.Name = "stopButton";
             this.stopButton.PressedColor = System.Drawing.Color.DarkRed;
             this.stopButton.ShadowDecoration.Parent = this.stopButton;
@@ -359,29 +332,98 @@
             // 
             this.ThreadsLabel.AutoSize = true;
             this.ThreadsLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ThreadsLabel.Font = new System.Drawing.Font("Segoe UI Light", 15F);
-            this.ThreadsLabel.ForeColor = System.Drawing.Color.White;
-            this.ThreadsLabel.Location = new System.Drawing.Point(63, 225);
+            this.ThreadsLabel.Font = new System.Drawing.Font("Segoe UI Light", 11F);
+            this.ThreadsLabel.ForeColor = System.Drawing.Color.Red;
+            this.ThreadsLabel.Location = new System.Drawing.Point(2, 286);
             this.ThreadsLabel.Name = "ThreadsLabel";
-            this.ThreadsLabel.Size = new System.Drawing.Size(89, 28);
+            this.ThreadsLabel.Size = new System.Drawing.Size(0, 20);
             this.ThreadsLabel.TabIndex = 18;
-            this.ThreadsLabel.Text = "Потоков:";
+            // 
+            // Packets
+            // 
+            this.Packets.AutoSize = true;
+            this.Packets.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Packets.Font = new System.Drawing.Font("Segoe UI Light", 11F);
+            this.Packets.ForeColor = System.Drawing.Color.Red;
+            this.Packets.Location = new System.Drawing.Point(353, 286);
+            this.Packets.Name = "Packets";
+            this.Packets.Size = new System.Drawing.Size(0, 20);
+            this.Packets.TabIndex = 19;
+            // 
+            // ddTools
+            // 
+            this.ddTools.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ddTools.BaseColor = System.Drawing.SystemColors.Control;
+            this.ddTools.CheckedOffColor = System.Drawing.Color.DarkGray;
+            this.ddTools.CheckedOnColor = System.Drawing.Color.Red;
+            this.ddTools.FillColor = System.Drawing.Color.White;
+            this.ddTools.Location = new System.Drawing.Point(28, 24);
+            this.ddTools.Name = "ddTools";
+            this.ddTools.Size = new System.Drawing.Size(38, 20);
+            this.ddTools.TabIndex = 4;
+            // 
+            // gunaLabel2
+            // 
+            this.gunaLabel2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.gunaLabel2.AutoSize = true;
+            this.gunaLabel2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gunaLabel2.Font = new System.Drawing.Font("Segoe UI Light", 15F);
+            this.gunaLabel2.ForeColor = System.Drawing.Color.White;
+            this.gunaLabel2.Location = new System.Drawing.Point(89, 16);
+            this.gunaLabel2.Name = "gunaLabel2";
+            this.gunaLabel2.Size = new System.Drawing.Size(108, 28);
+            this.gunaLabel2.TabIndex = 6;
+            this.gunaLabel2.Text = "DDoS-TooL";
+            // 
+            // xuiCustomGroupbox1
+            // 
+            this.xuiCustomGroupbox1.BorderColor = System.Drawing.Color.DarkRed;
+            this.xuiCustomGroupbox1.BorderWidth = 1;
+            this.xuiCustomGroupbox1.Controls.Add(this.ddTools);
+            this.xuiCustomGroupbox1.Controls.Add(this.gunaLabel2);
+            this.xuiCustomGroupbox1.Location = new System.Drawing.Point(81, 178);
+            this.xuiCustomGroupbox1.Name = "xuiCustomGroupbox1";
+            this.xuiCustomGroupbox1.ShowText = true;
+            this.xuiCustomGroupbox1.Size = new System.Drawing.Size(265, 65);
+            this.xuiCustomGroupbox1.TabIndex = 21;
+            this.xuiCustomGroupbox1.TabStop = false;
+            this.xuiCustomGroupbox1.Text = "Другое(самое эфф.)";
+            this.xuiCustomGroupbox1.TextColor = System.Drawing.Color.Red;
+            // 
+            // xuiCustomGroupbox2
+            // 
+            this.xuiCustomGroupbox2.BorderColor = System.Drawing.Color.DarkRed;
+            this.xuiCustomGroupbox2.BorderWidth = 1;
+            this.xuiCustomGroupbox2.Controls.Add(this.CMDThreads);
+            this.xuiCustomGroupbox2.Controls.Add(this.PSPingSwitch);
+            this.xuiCustomGroupbox2.Controls.Add(this.CMDPing);
+            this.xuiCustomGroupbox2.Controls.Add(this.pingLabel);
+            this.xuiCustomGroupbox2.Controls.Add(this.PSThreads);
+            this.xuiCustomGroupbox2.Controls.Add(this.banditLabel);
+            this.xuiCustomGroupbox2.Location = new System.Drawing.Point(81, 77);
+            this.xuiCustomGroupbox2.Name = "xuiCustomGroupbox2";
+            this.xuiCustomGroupbox2.ShowText = true;
+            this.xuiCustomGroupbox2.Size = new System.Drawing.Size(265, 95);
+            this.xuiCustomGroupbox2.TabIndex = 22;
+            this.xuiCustomGroupbox2.TabStop = false;
+            this.xuiCustomGroupbox2.Text = "PING";
+            this.xuiCustomGroupbox2.TextColor = System.Drawing.Color.Red;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(588, 259);
+            this.ClientSize = new System.Drawing.Size(588, 315);
             this.ControlBox = false;
+            this.Controls.Add(this.xuiCustomGroupbox2);
+            this.Controls.Add(this.xuiCustomGroupbox1);
+            this.Controls.Add(this.Packets);
             this.Controls.Add(this.ThreadsLabel);
             this.Controls.Add(this.stopButton);
-            this.Controls.Add(this.notifyLabel3);
             this.Controls.Add(this.notifyLabel2);
             this.Controls.Add(this.notifyLabel1);
             this.Controls.Add(this.runButton);
-            this.Controls.Add(this.guna2Panel1);
-            this.Controls.Add(this.gunaLabel4);
             this.Controls.Add(this.gunaLabel1);
             this.Controls.Add(this.TargetTextBox);
             this.Controls.Add(this.TopPanel);
@@ -395,8 +437,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TopPanel.ResumeLayout(false);
             this.TopPanel.PerformLayout();
-            this.guna2Panel1.ResumeLayout(false);
-            this.guna2Panel1.PerformLayout();
+            this.xuiCustomGroupbox1.ResumeLayout(false);
+            this.xuiCustomGroupbox1.PerformLayout();
+            this.xuiCustomGroupbox2.ResumeLayout(false);
+            this.xuiCustomGroupbox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -412,20 +456,22 @@
         private Guna.UI2.WinForms.Guna2DragControl FormDrag;
         private Guna.UI2.WinForms.Guna2TextBox TargetTextBox;
         private Guna.UI.WinForms.GunaLabel gunaLabel1;
-        private Guna.UI.WinForms.GunaGoogleSwitch banditSwitch;
-        private Guna.UI.WinForms.GunaGoogleSwitch pingSwitch;
+        private Guna.UI.WinForms.GunaGoogleSwitch PSPingSwitch;
+        private Guna.UI.WinForms.GunaGoogleSwitch CMDPing;
         private Guna.UI.WinForms.GunaLabel banditLabel;
         private Guna.UI.WinForms.GunaLabel pingLabel;
-        private Guna.UI.WinForms.GunaNumeric banditThreads;
-        private Guna.UI.WinForms.GunaNumeric pingThreads;
-        private Guna.UI.WinForms.GunaLabel gunaLabel4;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private Guna.UI.WinForms.GunaNumeric PSThreads;
+        private Guna.UI.WinForms.GunaNumeric CMDThreads;
         private Guna.UI2.WinForms.Guna2Button runButton;
         private Guna.UI.WinForms.GunaLabel notifyLabel1;
         private Guna.UI.WinForms.GunaLabel notifyLabel2;
-        private Guna.UI.WinForms.GunaLabel notifyLabel3;
         private Guna.UI2.WinForms.Guna2Button stopButton;
         private Guna.UI.WinForms.GunaLabel ThreadsLabel;
+        private Guna.UI.WinForms.GunaLabel Packets;
+        private Guna.UI.WinForms.GunaGoogleSwitch ddTools;
+        private Guna.UI.WinForms.GunaLabel gunaLabel2;
+        private XanderUI.XUICustomGroupbox xuiCustomGroupbox1;
+        private XanderUI.XUICustomGroupbox xuiCustomGroupbox2;
     }
 }
 
