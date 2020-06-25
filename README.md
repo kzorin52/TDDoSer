@@ -1,5 +1,4 @@
 # TDDoSer
-[![Build Status](https://travis-ci.org/kzorin52/TDDoSer.svg?branch=master)](https://travis-ci.org/kzorin52/TDDoSer)
 Temnij DDOS Tool - `ДуДоСеР`
 
 
